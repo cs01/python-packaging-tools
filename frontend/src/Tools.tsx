@@ -230,7 +230,7 @@ export const initialToolData: Tool[] = [
     ],
     toolDescription: `Poetry helps you declare, manage and install dependencies of Python projects. It also can publish packages to PyPI.`,
     useCases: [],
-    dependsOn: ['virtualenv'],
+    dependsOn: ['pip', 'virtualenv'],
     name: 'poetry',
   },
   {
