@@ -247,7 +247,7 @@ export const initialToolData: Tool[] = [
     dependsOn: ['pip', 'virtualenv', 'venv'],
   },
   {
-    features: ['virtual environment management', 'application deployment'],
+    features: ['virtual environment management', 'application deployment', 'task automation'],
     name: 'tox',
     toolDescription:
       'Command line driven CI frontend and development task automation tool',
@@ -255,7 +255,7 @@ export const initialToolData: Tool[] = [
     dependsOn: ['pip', 'virtualenv', 'venv'],
   },
   {
-    features: ['virtual environment management', 'application deployment'],
+    features: ['virtual environment management', 'application deployment', 'task automation'],
     name: 'nox',
     toolDescription:
       'nox is a command-line tool that automates task running, application deployment, and testing in multiple Python environments, similar to tox. Unlike tox, Nox uses a standard Python file for configuration.',
