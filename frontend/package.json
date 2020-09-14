@@ -28,9 +28,7 @@
     ]
   },
   "dependencies": {
-    "@types/luxon": "^1.24.4",
     "dotenv": "^8.2.0",
-    "match-sorter": "^4.2.0",
     "moment": "^2.28.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

@@ -361,7 +361,8 @@ button {
  * https://github.com/mozdevs/cssremedy/issues/14
  */
 
-img {
+img,
+svg {
   display: block;
   vertical-align: middle;
 }
@@ -514,10 +515,6 @@ img {
   font-size: 0.75rem;
 }
 
-.text-sm {
-  font-size: 0.875rem;
-}
-
 .text-xl {
   font-size: 1.25rem;
 }
@@ -526,13 +523,12 @@ img {
   margin: 0.25rem;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .mt-0 {
   margin-top: 0;
+}
+
+.mr-3 {
+  margin-right: 0.75rem;
 }
 
 .mb-10 {
@@ -576,6 +572,12 @@ img {
   --text-opacity: 1;
   color: #fff;
   color: rgba(255, 255, 255, var(--text-opacity));
+}
+
+.text-blue-800 {
+  --text-opacity: 1;
+  color: #2c5282;
+  color: rgba(44, 82, 130, var(--text-opacity));
 }
 
 .w-full {

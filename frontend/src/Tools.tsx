@@ -90,7 +90,41 @@ export function Table({ columns, data }: any) {
               >
                 {column.render('Header')}
                 <span>
-                  {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
+                  {column.isSorted ? (
+                    column.isSortedDesc ? (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        style={{ width: '12px', height: '12px' }}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        style={{ width: '12px', height: '12px' }}
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 10l7-7m0 0l7 7m-7-7v18"
+                        />
+                      </svg>
+                    )
+                  ) : (
+                    ''
+                  )}
                 </span>
               </th>
             ))}
@@ -285,7 +319,7 @@ export function FeatureFilter(props: { feature: Feature }) {
   return (
     <button
       className={
-        (filterIsOn ? `bg-blue-400 text-xs` : `bg-blue-200 text-sm`) +
+        (filterIsOn ? `bg-blue-400 text-xs` : `bg-blue-200 text-xs`) +
         ' hover:bg-blue-200 m-1 p-1 rounded-md  '
       }
       onClick={() => {
