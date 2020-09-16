@@ -16,6 +16,10 @@ const tools = [
     owner: "takluyver",
   },
   {
+    name: "python-build",
+    owner: "FFY00",
+  },
+  {
     name: "tox",
     owner: "tox-dev",
   },

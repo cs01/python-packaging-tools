@@ -25,6 +25,14 @@ export const initialToolData: Tool[] = [
     dependsOn: ['pip', 'venv'],
   },
   {
+    features: ['build packages'],
+    name: 'python-build',
+    toolDescription:
+      'A simple, correct PEP517 package builder. python-build will invoke the PEP 517 hooks to build a distribution package. It is a simple build tool, it does no dependency management.',
+    useCases: [],
+    dependsOn: [],
+  },
+  {
     features: ['dependency resolver'],
     name: 'pip-tools',
     toolDescription:
