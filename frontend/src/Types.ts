@@ -39,7 +39,9 @@ export type Feature =
   | 'standard library'
   | 'dependency resolver'
   | 'manual virtual environment creation'
-  | 'virtual environment management';
+  | 'virtual environment management'
+  | 'PEP-518'
+  | 'PEP-517';
 
 // TODO find out how to programatically link this to the type
 // @ts-ignore
@@ -55,4 +57,6 @@ export const features: Feature[] = [
   'dependency resolver',
   'manual virtual environment creation',
   'virtual environment management',
+  'PEP-517',
+  'PEP-518',
 ].sort();

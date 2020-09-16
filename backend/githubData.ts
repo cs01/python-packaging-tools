@@ -16,6 +16,14 @@ const tools = [
     owner: "takluyver",
   },
   {
+    name: "pyflow",
+    owner: "David-OConnor",
+  },
+  {
+    name: "pdm",
+    owner: "frontming",
+  },
+  {
     name: "python-build",
     owner: "FFY00",
   },

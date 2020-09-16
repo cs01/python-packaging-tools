@@ -1,5 +1,5 @@
 import { Tool } from './Types';
-export const initialToolData: Tool[] = [
+const _initialToolData: Tool[] = [
   {
     features: ['install cli apps', 'install libraries'],
     name: 'pip',
@@ -17,7 +17,7 @@ export const initialToolData: Tool[] = [
     dependsOn: ['pip', 'venv'],
   },
   {
-    features: ['build packages', 'publish packages'],
+    features: ['build packages', 'publish packages', 'PEP-517', 'PEP-518'],
     name: 'flit',
     toolDescription:
       'Flit is a simple way to put pure Python packages and modules on PyPI.',
@@ -29,6 +29,33 @@ export const initialToolData: Tool[] = [
     name: 'python-build',
     toolDescription:
       'A simple, correct PEP517 package builder. python-build will invoke the PEP 517 hooks to build a distribution package. It is a simple build tool, it does no dependency management.',
+    useCases: [],
+    dependsOn: [],
+  },
+  {
+    features: [
+      'build packages',
+      'PEP-517',
+      'dependency resolver',
+      'install cli apps',
+    ],
+    name: 'pdm',
+    toolDescription:
+      "PDM is meant to be a next generation Python package management tool. It was originally built for personal use. If you feel you are going well with Pipenv or Poetry and don't want to introduce another package manager, just stick to it. But if you are missing something that is not present in those tools, you can probably find some goodness in pdm.",
+    useCases: [],
+    dependsOn: [],
+  },
+  {
+    features: [
+      'virtual environment management',
+      'build packages',
+      'publish packages',
+      'dependency resolver',
+      'PEP-517',
+    ],
+    name: 'pyflow',
+    toolDescription:
+      "Pyflow streamlines working with Python projects and files. It's an easy-to-use CLI app with a minimalist API. Never worry about having the right version of Python or dependencies.",
     useCases: [],
     dependsOn: [],
   },
@@ -137,3 +164,7 @@ export const initialToolData: Tool[] = [
     url: 'https://docs.python.org/3/library/venv.html',
   },
 ];
+_initialToolData.sort((a, b) => {
+  return a.name < b.name ? -1 : 1;
+});
+export const initialToolData = _initialToolData;
