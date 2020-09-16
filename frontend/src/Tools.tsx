@@ -1,8 +1,43 @@
-import { GithubRepo } from './Types';
+import { GithubRepo, Tool, Feature, features } from './Types';
 import React from 'react';
 import { useTable, useSortBy } from 'react-table';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import { atom, useRecoilState } from 'recoil';
+import { initialToolData } from './initialToolData';
+
+const downArrow = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    style={{ width: '12px', height: '12px' }}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M19 14l-7 7m0 0l-7-7m7 7V3"
+    />
+  </svg>
+);
+
+const upArrow = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    style={{ width: '12px', height: '12px' }}
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"
+    />
+  </svg>
+);
 
 export const columns = [
   {
@@ -90,41 +125,11 @@ export function Table({ columns, data }: any) {
               >
                 {column.render('Header')}
                 <span>
-                  {column.isSorted ? (
-                    column.isSortedDesc ? (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        style={{ width: '12px', height: '12px' }}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                        />
-                      </svg>
-                    ) : (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        style={{ width: '12px', height: '12px' }}
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M5 10l7-7m0 0l7 7m-7-7v18"
-                        />
-                      </svg>
-                    )
-                  ) : (
-                    ''
-                  )}
+                  {column.isSorted
+                    ? column.isSortedDesc
+                      ? downArrow
+                      : upArrow
+                    : ''}
                 </span>
               </th>
             ))}
@@ -157,156 +162,6 @@ export function Table({ columns, data }: any) {
     </table>
   );
 }
-
-export type Feature =
-  | 'publish packages'
-  | 'build packages'
-  | 'application deployment'
-  | 'task automation'
-  | 'install cli apps'
-  | 'install libraries'
-  | 'install Python interpreter'
-  | 'standard library'
-  | 'dependency resolver'
-  | 'manual virtual environment creation'
-  | 'virtual environment management';
-
-// @ts-ignore
-export const features: Feature[] = [
-  'publish packages',
-  'build packages',
-  'application deployment',
-  'task automation',
-  'install cli apps',
-  'install libraries',
-  'install Python interpreter',
-  'standard library',
-  'dependency resolver',
-  'manual virtual environment creation',
-  'virtual environment management',
-].sort();
-
-type Tool = {
-  name: string;
-  features: Feature[];
-  toolDescription: string;
-  dependsOn: string[];
-  useCases: string[];
-} & GithubRepo;
-
-export const initialToolData: Tool[] = [
-  {
-    features: ['install cli apps', 'install libraries'],
-    name: 'pip',
-    useCases: ['Install libraries', 'Install CLI tools'],
-    dependsOn: [],
-    toolDescription:
-      'pip is the package installer for Python. You can use pip to install packages from the Python Package Index (PyPI) and other indexes.',
-  },
-  {
-    features: ['install cli apps', 'virtual environment management'],
-    name: 'pipx',
-    toolDescription:
-      'pipx runs and installs cli tools in virtual environments. It focuses and improves on a specific use case handled by pip.',
-    useCases: ['Install cli tools to isolated environment'],
-    dependsOn: ['pip', 'venv'],
-  },
-  {
-    features: ['dependency resolver'],
-    name: 'pip-tools',
-    toolDescription:
-      'pip-tools takes abstract dependencies and outputs concrete dependencies to a lock file.',
-    useCases: ['Separate abstract dependencies from fully resolved lock file'],
-    dependsOn: ['pip'],
-  },
-  {
-    features: [
-      'publish packages',
-      'build packages',
-      'dependency resolver',
-      'application deployment',
-      'task automation',
-      'virtual environment management',
-    ],
-    toolDescription: `Poetry helps you declare, manage and install dependencies of Python projects. It also can publish packages to PyPI.`,
-    useCases: [],
-    dependsOn: ['pip', 'virtualenv'],
-    name: 'poetry',
-  },
-  {
-    features: [
-      'virtual environment management',
-      'dependency resolver',
-      'task automation',
-      'application deployment',
-    ],
-    name: 'pipenv',
-    toolDescription:
-      'pipenv automatically creates and manages a virtualenv for your projects, as well as adds/removes packages from a Pipfile as you install/uninstall packages. It also generates Pipfile.lock, which is used to produce deterministic builds.',
-    useCases: [],
-    dependsOn: ['pip', 'virtualenv', 'venv'],
-  },
-  {
-    features: ['virtual environment management', 'application deployment', 'task automation'],
-    name: 'tox',
-    toolDescription:
-      'Command line driven CI frontend and development task automation tool',
-    useCases: [],
-    dependsOn: ['pip', 'virtualenv', 'venv'],
-  },
-  {
-    features: ['virtual environment management', 'application deployment', 'task automation'],
-    name: 'nox',
-    toolDescription:
-      'nox is a command-line tool that automates task running, application deployment, and testing in multiple Python environments, similar to tox. Unlike tox, Nox uses a standard Python file for configuration.',
-    useCases: [],
-    dependsOn: ['pip', 'virtualenv', 'venv'],
-  },
-  {
-    features: ['manual virtual environment creation'],
-    name: 'virtualenv',
-    toolDescription:
-      'A tool for creating isolated virtual (isolated) python environments. This is essentially a 3rd party package that duplicates the standard libary venv module.',
-    useCases: [],
-    dependsOn: [],
-  },
-  {
-    features: ['install Python interpreter'],
-    name: 'pyenv',
-    toolDescription:
-      'pyenv lets you switch between multiple versions of Python on your machine',
-    useCases: [],
-    dependsOn: [],
-  },
-  {
-    features: ['publish packages'],
-    name: 'twine',
-    toolDescription:
-      'Twine is a utility for publishing Python packages on PyPI. Twine only publishes built packages; it does not build them itself.',
-    useCases: [],
-    dependsOn: [],
-  },
-
-  {
-    features: ['build packages'],
-    toolDescription:
-      'Setuptools is a fully-featured, actively-maintained, and stable library designed to facilitate packaging Python projects. setuptools builds redistributable packages from source, but does not publish them to PyPI.',
-    useCases: [],
-    dependsOn: [],
-    name: 'setuptools',
-  },
-  {
-    features: ['manual virtual environment creation', 'standard library'],
-    toolDescription:
-      'The venv module provides support for creating lightweight “virtual environments” with their own site directories, optionally isolated from system site directories. Each virtual environment has its own Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directories.',
-    useCases: [],
-    dependsOn: [],
-    createdAt: '2015-09-13T00:00:00Z',
-    primaryLanguage: { name: 'Python' },
-    name: 'venv',
-    url: 'https://docs.python.org/3/library/venv.html',
-  },
-];
 
 export const recoilFilters = atom<Feature[]>({
   key: 'recoilFilters', // unique ID (with respect to other atoms/selectors)
@@ -350,9 +205,11 @@ export function getTableData(
       toolDescription: <div className="text-left">{data.toolDescription}</div>,
       dependsOn: data.dependsOn.join(', '),
       useCases: data.useCases.join(', '),
-      timeSinceCreated: data.createdAt ? moment(data.createdAt).fromNow() : '',
+      timeSinceCreated: data.createdAt
+        ? DateTime.fromISO(data.createdAt).toFormat('MMMM, y')
+        : '',
       timeSinceUpdated: data.pushedAt
-        ? `${moment(data.pushedAt).fromNow()}`
+        ? DateTime.fromISO(data.pushedAt).toLocaleString()
         : '',
       urls: [data.url, data.homepageUrl]
         .filter((url) => url)

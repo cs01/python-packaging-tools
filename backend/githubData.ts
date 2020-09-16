@@ -12,6 +12,10 @@ const tools = [
     owner: "pypa",
   },
   {
+    name: "flit",
+    owner: "takluyver",
+  },
+  {
     name: "tox",
     owner: "tox-dev",
   },

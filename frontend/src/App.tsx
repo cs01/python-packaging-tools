@@ -5,12 +5,11 @@ import {
   getTableData,
   Table,
   fetchGithubData,
-  initialToolData,
-  features,
-  Feature,
   recoilFilters,
   FeatureFilter,
 } from './Tools';
+import { features, Feature } from './Types';
+import { initialToolData } from './initialToolData';
 import { RecoilRoot, useRecoilValue } from 'recoil';
 
 function FeatureFilters() {
