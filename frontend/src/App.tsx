@@ -14,7 +14,7 @@ import { RecoilRoot, useRecoilValue } from 'recoil';
 
 function FeatureFilters() {
   return (
-    <div className="w-full mx-auto max-w-xl text-center">
+    <div className="w-full mx-auto max-w-lg text-center">
       {features.map((feature: Feature, i) => (
         <FeatureFilter key={i} feature={feature} />
       ))}
@@ -74,7 +74,7 @@ function App() {
             </div>
           </div>
         </nav>
-        <div className="">
+        <div className="container">
           <FeaturesAndTable />
         </div>
         <div className="my-24 text-lg">
