@@ -40,6 +40,8 @@ export type Feature =
   | 'dependency resolver'
   | 'manual virtual environment creation'
   | 'virtual environment management'
+  | 'package manager'
+  | 'ecosystem'
   | 'PEP-518'
   | 'PEP-517';
 
@@ -57,6 +59,8 @@ export const features: Feature[] = [
   'dependency resolver',
   'manual virtual environment creation',
   'virtual environment management',
+  'package manager',
+  'ecosystem',
   'PEP-517',
   'PEP-518',
 ].sort();

@@ -12,6 +12,10 @@ const tools = [
     owner: "pypa",
   },
   {
+    name: "conda",
+    owner: "conda",
+  },
+  {
     name: "flit",
     owner: "takluyver",
   },
@@ -21,7 +25,7 @@ const tools = [
   },
   {
     name: "pdm",
-    owner: "frontming",
+    owner: "frostming",
   },
   {
     name: "python-build",
