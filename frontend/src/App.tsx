@@ -14,11 +14,11 @@ import { RecoilRoot, useRecoilValue } from 'recoil';
 
 function FeatureFilters() {
   return (
-    <>
+    <div className="w-full mx-auto max-w-xl text-center">
       {features.map((feature: Feature, i) => (
         <FeatureFilter key={i} feature={feature} />
       ))}
-    </>
+    </div>
   );
 }
 const githubLogo = (
@@ -74,12 +74,22 @@ function App() {
             </div>
           </div>
         </nav>
-        <div className="container w-full mx-15">
+        <div className="">
           <FeaturesAndTable />
         </div>
+        <div className="my-24 text-lg">
+          <div className="font-bold mx-auto text-center">
+            Missing something?
+          </div>
+          <div>
+            <a href="https://github.com/cs01/python-packaging-tools">
+              File an Issue or Pull Request on GitHub.
+            </a>
+          </div>
+        </div>
         <footer className="w-full flex items-center bg-black mt-20 h-64 text-white ">
-          <div className="w-full text-xl text-center text-blue-800">
-            a <a href="http://grassfedcode.com">grassfedcode.com</a> project
+          <div className="w-full text-xl text-center text-white">
+            <a href="http://grassfedcode.com">a grass fed code project</a>
           </div>
         </footer>
       </div>

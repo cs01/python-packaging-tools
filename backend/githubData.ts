@@ -16,6 +16,10 @@ const tools = [
     owner: "conda",
   },
   {
+    name: "dephell",
+    owner: "dephell",
+  },
+  {
     name: "flit",
     owner: "takluyver",
   },

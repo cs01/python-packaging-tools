@@ -42,6 +42,7 @@ export type Feature =
   | 'virtual environment management'
   | 'package manager'
   | 'ecosystem'
+  | 'convert between lockfile formats'
   | 'PEP-518'
   | 'PEP-517';
 
@@ -60,6 +61,7 @@ export const features: Feature[] = [
   'manual virtual environment creation',
   'virtual environment management',
   'package manager',
+  'convert between lockfile formats',
   'ecosystem',
   'PEP-517',
   'PEP-518',

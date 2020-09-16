@@ -175,7 +175,7 @@ export function FeatureFilter(props: { feature: Feature }) {
     <button
       className={
         (filterIsOn ? `bg-blue-400 text-xs` : `bg-blue-200 text-xs`) +
-        ' hover:bg-blue-200 m-1 p-1 rounded-md  '
+        ' m-1 p-1 rounded-md  '
       }
       onClick={() => {
         if (filterIsOn) {
@@ -197,13 +197,17 @@ export function getTableData(
   return toolData
     .map((data) => ({
       ...data,
-      name: data.url ? <a href={data.url}>{data.name}</a> : data.name,
-      featureLinks: data.features.map((f, i) => (
-        <FeatureFilter key={i} feature={f} />
-      )),
+      name: (
+        <div className="font-bold text-lg">
+          {data.url ? <a href={data.url}>{data.name}</a> : data.name}
+        </div>
+      ),
+      featureLinks: data.features
+        .sort()
+        .map((feature, i) => <FeatureFilter key={i} feature={feature} />),
       description: <div className="text-left">{data.description}</div>,
       toolDescription: <div className="text-left">{data.toolDescription}</div>,
-      dependsOn: data.dependsOn.join(', '),
+      dependsOn: data.dependsOn.sort().join(', '),
       useCases: data.useCases.join(', '),
       timeSinceCreated: data.createdAt
         ? DateTime.fromISO(data.createdAt).toFormat('MMMM, y')

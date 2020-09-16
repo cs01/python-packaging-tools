@@ -33,7 +33,22 @@ const _initialToolData: Tool[] = [
     dependsOn: [],
   },
   {
-    features: ['build packages'],
+    features: [
+      'virtual environment management',
+      'install cli apps',
+      'dependency resolver',
+      'install libraries',
+      'build packages',
+      'convert between lockfile formats',
+    ],
+    name: 'dephell',
+    toolDescription:
+      'dephell includes numerous project management functions: Manage packages: convert between formats, lock, install, resolve, isolate, test, build graph, show outdated, audit. Manage venvs, build package, bump version.',
+    useCases: [],
+    dependsOn: ['venv', 'virtualenv', 'pip'],
+  },
+  {
+    features: ['build packages', 'PEP-517'],
     name: 'python-build',
     toolDescription:
       'A simple, correct PEP517 package builder. python-build will invoke the PEP 517 hooks to build a distribution package. It is a simple build tool, it does no dependency management.',
@@ -131,7 +146,7 @@ const _initialToolData: Tool[] = [
     features: ['manual virtual environment creation'],
     name: 'virtualenv',
     toolDescription:
-      'A tool for creating isolated virtual (isolated) python environments. This is essentially a 3rd party package that duplicates the standard libary venv module.',
+      'A tool for creating isolated virtual Python environments. This is essentially a 3rd party package that duplicates the standard libary venv module. It predates venv, and works for all Python versions, including < 3.5 when venv was introduced.',
     useCases: [],
     dependsOn: [],
   },
@@ -155,7 +170,7 @@ const _initialToolData: Tool[] = [
   {
     features: ['build packages'],
     toolDescription:
-      'Setuptools is a fully-featured, actively-maintained, and stable library designed to facilitate packaging Python projects. setuptools builds redistributable packages from source, but does not publish them to PyPI.',
+      "Setuptools is a fully-featured, actively-maintained, and stable library to build redistributable packages from source, but does not publish them to PyPI. It provides the function that is called in the setup.py files you've probably seen before.",
     useCases: [],
     dependsOn: [],
     name: 'setuptools',
@@ -163,7 +178,7 @@ const _initialToolData: Tool[] = [
   {
     features: ['manual virtual environment creation', 'standard library'],
     toolDescription:
-      'The venv module provides support for creating lightweight “virtual environments” with their own site directories, optionally isolated from system site directories. Each virtual environment has its own Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directories.',
+      "The venv module provides support for creating lightweight “virtual environments” with their own site directories, optionally isolated from system site directories. Each virtual environment has its own Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directories. venv was introduced in Python 3.5 to adopt the 3rd party library virtualenv into CPython's standard library.",
     useCases: [],
     dependsOn: [],
     createdAt: '2015-09-13T00:00:00Z',
