@@ -1,6 +1,6 @@
 import { GithubRepo, Tool, Feature, features } from './Types';
 import React from 'react';
-import { useTable, useSortBy } from 'react-table';
+import { useTable, useSortBy, useFlexLayout } from 'react-table';
 import { DateTime } from 'luxon';
 import { atom, useRecoilState } from 'recoil';
 import { initialToolData } from './initialToolData';
@@ -31,9 +31,9 @@ const upArrow = (
     style={{ width: '12px', height: '12px' }}
   >
     <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
       d="M5 10l7-7m0 0l7 7m-7-7v18"
     />
   </svg>
@@ -43,17 +43,18 @@ export const columns = [
   {
     Header: 'Name',
     accessor: 'name',
-    width: 400,
+    // width: 400,
   },
   {
     Header: 'Features',
     accessor: 'featureLinks',
+    minWidth: 300,
   },
   {
     Header: 'Description',
     accessor: 'toolDescription',
-    minWidth: 300,
-    width: 1000,
+    minWidth: 400,
+    // width: 100,
   },
   // {
   //   Header: 'Use Cases',
@@ -86,10 +87,12 @@ export const columns = [
   {
     Header: 'Links',
     accessor: 'urls',
+    minWidth: 300,
   },
   {
     Header: 'GitHub Description',
     accessor: 'description',
+    minWidth: 400,
   },
 ];
 
@@ -107,13 +110,15 @@ export function Table({ columns, data }: any) {
       data,
     },
     useSortBy,
+    useFlexLayout,
   );
 
   // Render the UI for your table
   return (
     <table
       {...getTableProps()}
-      className="w-full h-full text-center border-2 border-gray-200"
+      className="text-center border-2 border-gray-200"
+      // style={{ width: '5000px' }}
     >
       <thead className="bg-gray-600">
         {headerGroups.map((headerGroup) => (
@@ -149,7 +154,7 @@ export function Table({ columns, data }: any) {
                   <td
                     {...cell.getCellProps()}
                     className="p-5"
-                    style={{ width: '500px' }}
+                    // style={{ width: '500px' }}
                   >
                     {cell.render('Cell')}
                   </td>
@@ -240,6 +245,10 @@ export function getTableData(
 
 export async function fetchGithubData(): Promise<any> {
   const response = await fetch('package_data');
+  if (!response.ok) {
+    console.warn('GitHub data unavailable');
+    return initialToolData;
+  }
   const allGithubData: GithubRepo[] = await response.json();
   return initialToolData.map((tool) => {
     const githubData: GithubRepo | void = allGithubData.find(
