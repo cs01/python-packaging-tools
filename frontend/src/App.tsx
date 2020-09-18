@@ -60,22 +60,20 @@ function App() {
   return (
     <RecoilRoot>
       <div className="min-h-screen flex flex-col">
-        <nav className="bg-blue-800 p-2 w-full h-32">
-          <div className="w-screen flex items-center justify-between mt-0 py-2">
-            <div className="pl-4 flex items-center">
-              <img
-                alt="Python logo"
-                src="https://www.python.org/static/img/python-logo.png"
-              />
-              <div className="text-white text-xl">
-                The Big List of Python Packaging and Distribution Tools
-              </div>
+        <nav className="bg-blue-800 py-5 p-2 flex justify-between items-center">
+          <div className="flex items-center">
+            <img
+              alt="Python logo"
+              src="https://www.python.org/static/img/python-logo.png"
+            />
+            <div className="text-white text-xl pr-10">
+              The Big List of Python Packaging and Distribution Tools
             </div>
-            <div className="text-white pr-10">
-              <a href="https://github.com/cs01/python-packaging-tools">
-                {githubLogo}
-              </a>
-            </div>
+          </div>
+          <div className="text-white pr-10">
+            <a href="https://github.com/cs01/python-packaging-tools">
+              {githubLogo}
+            </a>
           </div>
         </nav>
         <div className="mx-2 mt-2 min-h-screen">
