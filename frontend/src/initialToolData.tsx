@@ -146,7 +146,7 @@ const _initialToolData: Tool[] = [
     features: ['manual virtual environment creation'],
     name: 'virtualenv',
     toolDescription:
-      'A tool for creating isolated virtual Python environments. This is essentially a 3rd party package that duplicates the standard libary venv module. It predates venv, and works for all Python versions, including < 3.5 when venv was introduced.',
+      'A tool for creating isolated virtual Python environments. This is a predecessor of the Python 3.5+ standard library venv module, with improvements such as vastly faster virtualenv creation added in subsequent versions.',
     useCases: [],
     dependsOn: [],
   },
