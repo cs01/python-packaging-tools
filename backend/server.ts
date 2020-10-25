@@ -16,6 +16,12 @@ const maxCacheAgeMs = hourInMs;
 
 const msToMinutes = (1 / msPerSec) * (1 / secPerMin);
 
+app.use(function (req, res, next) {
+  console.log(req.url)
+  next()
+})
+
+
 app.get("/package_data", async (req, res) => {
   const now = Date.now();
   const age = now - cachedData.cachedAt;
