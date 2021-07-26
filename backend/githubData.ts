@@ -79,6 +79,10 @@ const tools = [
     name: "pip-tools",
     owner: "jazzband",
   },
+  {
+    name: "fades",
+    owner: "PyAr",
+  },
 ];
 
 function getQuery(name: string, owner: string) {

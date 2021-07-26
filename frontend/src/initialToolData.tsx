@@ -186,6 +186,17 @@ const _initialToolData: Tool[] = [
     name: 'venv',
     url: 'https://docs.python.org/3/library/venv.html',
   },
+  {
+    features: ['application deployment', 'task automation', 'virtual environment management'],
+    name: 'fades',
+    toolDescription:
+      'fades is a system that automatically handles the virtualenvs in the cases normally found when writing scripts and simple programs, and even helps to administer big projects.',
+    useCases: ['automatically manage virtualenvs', 'virtualenv lifecycle autocontained inside scripts', 'run interactive interpreter inside virtualenv for simple testing new libraries'],
+    dependsOn: [],
+    url: 'https://github.com/PyAr/fades/',
+    createdAt: '2014-11-17T02:44:04Z',
+    primaryLanguage: { name: 'Python' },
+  },
 ];
 _initialToolData.sort((a, b) => {
   return a.name < b.name ? -1 : 1;
