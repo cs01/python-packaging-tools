@@ -89,7 +89,7 @@ function App() {
         </div>
         <footer className="w-full flex items-center content-center bg-black mt-20 h-64 text-white ">
           <div className="w-full text-xl  text-center text-white">
-            <a href="http://grassfedcode.com">a grass fed code project</a>
+            <a href="http://chadsmith.dev">a Chad Smith project</a>
           </div>
         </footer>
       </div>
