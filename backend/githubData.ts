@@ -52,6 +52,10 @@ const tools = [
     owner: "python-poetry",
   },
   {
+    name: "hatch",
+    owner: "ofek",
+  },
+  {
     name: "pipenv",
     owner: "pypa",
   },

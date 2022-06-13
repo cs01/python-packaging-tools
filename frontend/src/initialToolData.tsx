@@ -106,6 +106,19 @@ const _initialToolData: Tool[] = [
   },
   {
     features: [
+      'publish packages',
+      'build packages',
+      'application deployment',
+      'task automation',
+      'virtual environment management',
+    ],
+    toolDescription: `Hatch is a tool for managing the entire lifecycle of a project including creation, versioning, building, environment management, and publishing. Its plugin system allows for easily extending functionality.`,
+    useCases: [],
+    dependsOn: ['pip', 'virtualenv'],
+    name: 'hatch',
+  },
+  {
+    features: [
       'virtual environment management',
       'dependency resolver',
       'task automation',
