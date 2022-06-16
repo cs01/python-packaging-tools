@@ -1,4 +1,4 @@
-export type GithubRepo = {
+export type GithubGraphqlShape = {
   stargazers?: {
     totalCount: number;
   };
@@ -18,6 +18,9 @@ export type GithubRepo = {
   owner?: string;
   url?: string;
   homepageUrl?: string;
+  latestRelease?: {
+    publishedAt: string;
+  };
 };
 
 export type Tool = {
@@ -26,11 +29,14 @@ export type Tool = {
   toolDescription: string;
   dependsOn: string[];
   useCases: string[];
-} & GithubRepo;
+} & GithubGraphqlShape;
 
 export type Feature =
+  | 'core utilities'
   | 'publish packages'
   | 'build packages'
+  | 'language bindings'
+  | 'builds executable'
   | 'application deployment'
   | 'task automation'
   | 'install cli apps'
@@ -43,8 +49,12 @@ export type Feature =
   | 'package manager'
   | 'ecosystem'
   | 'convert between lockfile formats'
+  | 'PEP-440'
+  | 'PEP-425'
+  | 'PEP-582'
   | 'PEP-518'
-  | 'PEP-517';
+  | 'PEP-517'
+  | 'PEP-660';
 
 // TODO find out how to programatically link this to the type
 // @ts-ignore

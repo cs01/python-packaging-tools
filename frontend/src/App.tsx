@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import {
   columns,
-  getTableData,
+  toolDataToTableData,
   Table,
   fetchGithubData,
   recoilFilters,
@@ -44,14 +44,22 @@ function FeaturesAndTable() {
   }, []);
 
   const featureFilters = useRecoilValue(recoilFilters);
-  const data = useMemo(() => getTableData(toolData, featureFilters), [
-    toolData,
-    featureFilters,
-  ]);
+  const tableData = useMemo(
+    () => toolDataToTableData(toolData, featureFilters),
+    [toolData, featureFilters],
+  );
+  const isFiltered = tableData.length != toolData.length;
+  const displayingToolSummary = (
+    <div className={'text-sm ' + (isFiltered ? 'font-bold bg-yellow-300' : '')}>
+      Displaying {tableData.length} of {toolData.length} tools
+    </div>
+  );
   return (
     <>
       <FeatureFilters />
-      <Table columns={columns} data={data} />
+      {displayingToolSummary}
+      <Table columns={columns} data={tableData} />
+      {displayingToolSummary}
     </>
   );
 }
@@ -66,14 +74,25 @@ function App() {
               alt="Python logo"
               src="https://www.python.org/static/img/python-logo.png"
             />
-            <div className="text-white text-xl pr-10">
-              The Big List of Python Packaging and Distribution Tools
+            <div>
+              <div className="text-white text-xl pr-10">
+                The Big List of Python Packaging and Distribution Tools
+              </div>
+              <div className="text-white  pr-10">
+                <a href="http://chadsmith.dev">a Chad Smith project</a>
+              </div>
+              <div className="text-white pr-10 flex">
+                <a
+                  href="https://github.com/cs01/python-packaging-tools"
+                  className="mr-2"
+                >
+                  GitHub
+                </a>
+                <a href="https://github.com/cs01/python-packaging-tools">
+                  {githubLogo}
+                </a>
+              </div>
             </div>
-          </div>
-          <div className="text-white pr-10">
-            <a href="https://github.com/cs01/python-packaging-tools">
-              {githubLogo}
-            </a>
           </div>
         </nav>
         <div className="mx-2 mt-2 min-h-screen">

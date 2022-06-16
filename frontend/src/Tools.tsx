@@ -1,4 +1,4 @@
-import { GithubRepo, Tool, Feature, features } from './Types';
+import { GithubGraphqlShape, Tool, Feature, features } from './Types';
 import React from 'react';
 import { useTable, useSortBy, useFlexLayout } from 'react-table';
 import { DateTime } from 'luxon';
@@ -93,6 +93,10 @@ export const columns = [
     Header: 'GitHub Description',
     accessor: 'description',
     minWidth: 400,
+  },
+  {
+    Header: 'Last GitHub Release',
+    accessor: 'latestRelease.publishedAt',
   },
 ];
 
@@ -195,12 +199,12 @@ export function FeatureFilter(props: { feature: Feature }) {
   );
 }
 
-export function getTableData(
+export function toolDataToTableData(
   toolData: Array<Tool>,
   featuresToFilter: Array<Feature>,
 ) {
   return toolData
-    .map((data) => ({
+    .map((data: Tool) => ({
       ...data,
       name: (
         <div className="font-bold text-lg">
@@ -214,9 +218,17 @@ export function getTableData(
       toolDescription: <div className="text-left">{data.toolDescription}</div>,
       dependsOn: data.dependsOn.sort().join(', '),
       useCases: data.useCases.join(', '),
+      latestRelease: data.latestRelease
+        ? {
+            publishedAt: DateTime.fromISO(
+              data.latestRelease.publishedAt,
+            ).toFormat('MMMM dd, y'),
+          }
+        : '',
       timeSinceCreated: data.createdAt
         ? DateTime.fromISO(data.createdAt).toFormat('MMMM, y')
         : '',
+
       timeSinceUpdated: data.pushedAt
         ? DateTime.fromISO(data.pushedAt).toLocaleString()
         : '',
@@ -243,22 +255,29 @@ export function getTableData(
     });
 }
 
+function mergeGithubDataWithLocalData(
+  allGithubData: GithubGraphqlShape[],
+): Tool[] {
+  return initialToolData.map((tool) => {
+    const githubDataForTool: GithubGraphqlShape | void = allGithubData.find(
+      (d) => d.name?.toLocaleLowerCase() === tool.name.toLocaleLowerCase(),
+    );
+    if (githubDataForTool) {
+      return { ...tool, ...githubDataForTool };
+    } else {
+      console.warn(`No github data found for ${tool.name}`);
+      return tool;
+    }
+  });
+}
+
 export async function fetchGithubData(): Promise<any> {
   const response = await fetch('package_data');
   if (!response.ok) {
     console.warn('GitHub data unavailable');
     return initialToolData;
   }
-  const allGithubData: GithubRepo[] = await response.json();
-  return initialToolData.map((tool) => {
-    const githubData: GithubRepo | void = allGithubData.find(
-      (d) => d.name === tool.name,
-    );
-    if (githubData) {
-      return { ...tool, ...githubData };
-    } else {
-      console.warn(`No github data found for ${tool.name}`);
-      return tool;
-    }
-  });
+
+  const allGithubData: GithubGraphqlShape[] = await response.json();
+  return mergeGithubDataWithLocalData(allGithubData);
 }

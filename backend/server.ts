@@ -17,25 +17,20 @@ const maxCacheAgeMs = hourInMs;
 const msToMinutes = (1 / msPerSec) * (1 / secPerMin);
 
 app.use(function (req, res, next) {
-  console.log(req.url)
-  next()
-})
-
+  console.log(req.url);
+  next();
+});
 
 app.get("/package_data", async (req, res) => {
   const now = Date.now();
   const age = now - cachedData.cachedAt;
   const timeUntilRefetch = maxCacheAgeMs - age;
-  console.error(
-    `Cache is ${age * msToMinutes} minutes old. ${
-      timeUntilRefetch * msToMinutes
-    } minutes left until new data is used`
-  );
   if (timeUntilRefetch <= 0) {
+    console.info("fetching new data");
     cachedData.data = await fetchGithubData();
     cachedData.cachedAt = now;
   } else {
-    console.error("using cached data");
+    console.info("using cached data");
   }
   res.json(cachedData.data);
 });
