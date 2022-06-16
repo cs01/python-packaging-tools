@@ -1,4 +1,8 @@
 import { Tool } from './Types';
+
+const zipAppDescription =
+  'Makes "python executables", which are files that can be run directly, but require a python interpreter available on the system. This is part of a group of tools that utilize the zipapp feature of the standard library.';
+
 const _initialToolData: Tool[] = [
   {
     features: ['install cli apps', 'install libraries'],
@@ -34,37 +38,17 @@ const _initialToolData: Tool[] = [
   },
   {
     features: [
-      'virtual environment management',
-      'install cli apps',
-      'dependency resolver',
-      'install libraries',
-      'build packages',
-      'convert between lockfile formats',
-    ],
-    name: 'dephell',
-    toolDescription:
-      'dephell includes numerous project management functions: Manage packages: convert between formats, lock, install, resolve, isolate, test, build graph, show outdated, audit. Manage venvs, build package, bump version.',
-    useCases: [],
-    dependsOn: ['venv', 'virtualenv', 'pip'],
-  },
-  {
-    features: ['build packages', 'PEP-517'],
-    name: 'python-build',
-    toolDescription:
-      'A simple, correct PEP517 package builder. python-build will invoke the PEP 517 hooks to build a distribution package. It is a simple build tool, it does no dependency management.',
-    useCases: [],
-    dependsOn: [],
-  },
-  {
-    features: [
       'build packages',
       'PEP-517',
+      'PEP-582',
       'dependency resolver',
       'install cli apps',
     ],
     name: 'pdm',
     toolDescription:
-      "PDM is meant to be a next generation Python package management tool. It was originally built for personal use. If you feel you are going well with Pipenv or Poetry and don't want to introduce another package manager, just stick to it. But if you are missing something that is not present in those tools, you can probably find some goodness in pdm.",
+      'Helps you declare, manage, and install dependencies of Python projects. ' +
+      'It does not use virtual environments at all. ' +
+      'Instead it installs packages to a local directory called __pypackages__ (PEP-582).',
     useCases: [],
     dependsOn: [],
   },
@@ -75,10 +59,15 @@ const _initialToolData: Tool[] = [
       'publish packages',
       'dependency resolver',
       'PEP-517',
+      'PEP-582',
     ],
     name: 'pyflow',
     toolDescription:
-      "Pyflow streamlines working with Python projects and files. It's an easy-to-use CLI app with a minimalist API. Never worry about having the right version of Python or dependencies.",
+      'Pyflow streamlines working with Python projects and files. ' +
+      "It's an easy-to-use CLI app with a minimalist API. " +
+      'Never worry about having the right version of Python or dependencies. ' +
+      'Instead of using virtual environments, it installs packages to a local ' +
+      'directory named __pypackages__ (PEP-582)',
     useCases: [],
     dependsOn: [],
   },
@@ -131,6 +120,25 @@ const _initialToolData: Tool[] = [
     dependsOn: ['pip', 'virtualenv', 'venv'],
   },
   {
+    features: ['PEP-517', 'PEP-660', 'build packages'],
+    name: 'build',
+    toolDescription:
+      'build will invoke the PEP 517 hooks to build a distribution package. ' +
+      'It is a simple build tool and does not perform any dependency management.',
+    useCases: [],
+    dependsOn: [],
+  },
+  {
+    features: ['PEP-517', 'build packages', 'core utilities'],
+    name: 'pep517',
+    toolDescription:
+      'Given source code and a build backend (as specified by PEP-518), ' +
+      '`pep517` provides access to various backend "hooks" such as building a binary distribution. ' +
+      'You are responsible for ensuring build requirements are available.',
+    useCases: [],
+    dependsOn: [],
+  },
+  {
     features: [
       'virtual environment management',
       'application deployment',
@@ -179,7 +187,6 @@ const _initialToolData: Tool[] = [
     useCases: [],
     dependsOn: [],
   },
-
   {
     features: ['build packages'],
     toolDescription:
@@ -189,6 +196,60 @@ const _initialToolData: Tool[] = [
     name: 'setuptools',
   },
   {
+    name: 'pex',
+    features: ['builds executable'],
+    toolDescription: zipAppDescription,
+    useCases: [],
+    dependsOn: ['zipapp'],
+  },
+  {
+    name: 'zipapp',
+    features: ['builds executable', 'standard library'],
+    toolDescription: zipAppDescription,
+    useCases: [],
+    dependsOn: [],
+  },
+  {
+    name: 'shiv',
+    features: ['builds executable'],
+    toolDescription: zipAppDescription,
+    useCases: [],
+    dependsOn: [],
+  },
+  {
+    name: 'PyOxidizer',
+    features: ['builds executable'],
+    toolDescription:
+      'PyOxidizer is a [Rust] application for streamlining the creation of distributable Python applications. ' +
+      'Binaries produced with PyOxidizer are portable. PyOxidizer generate binaries embedding a Python interpreter and a custom Python application. ',
+    useCases: [],
+    dependsOn: [],
+  },
+  {
+    name: 'pyinstaller',
+    features: ['builds executable'],
+    toolDescription:
+      'PyInstaller bundles a Python application and all its dependencies into a single package. ' +
+      'The user can run the packaged app without installing a Python interpreter or any modules. ' +
+      'PyInstaller supports Python 3.7 and newer, and correctly bundles many major Python packages ' +
+      'such as numpy, matplotlib, PyQt, wxPython, and others.',
+    useCases: [],
+    dependsOn: [],
+  },
+  {
+    name: 'xar',
+    features: ['builds executable'],
+    toolDescription:
+      'Similar to a zipapp, but contents do not have to be extracted to run. ' +
+      'A .xar file is a read-only file system image which looks like a regular directory to user-space programs. ' +
+      'This can replace virtualenvs and PEX files with a system that is faster, has less overhead, ' +
+      'is more compatible, and achieves better compression. This requires a one-time installation of a ' +
+      'driver for this file system (SquashFS).',
+    useCases: [],
+    dependsOn: ['FUSE filesystem', 'linux/mac'],
+  },
+  {
+    name: 'venv',
     features: ['manual virtual environment creation', 'standard library'],
     toolDescription:
       "The venv module provides support for creating lightweight “virtual environments” with their own site directories, optionally isolated from system site directories. Each virtual environment has its own Python binary (which matches the version of the binary that was used to create this environment) and can have its own independent set of installed Python packages in its site directories. venv was introduced in Python 3.5 to adopt the 3rd party library virtualenv into CPython's standard library.",
@@ -196,11 +257,49 @@ const _initialToolData: Tool[] = [
     dependsOn: [],
     createdAt: '2015-09-13T00:00:00Z',
     primaryLanguage: { name: 'Python' },
-    name: 'venv',
     url: 'https://docs.python.org/3/library/venv.html',
+  },
+  {
+    name: 'Nuitka',
+    features: ['builds executable'],
+    toolDescription:
+      'Nuitka can compile Python programs to single executables. ' +
+      'And the emphasis is on compile: Nuitka actually converts Python ' +
+      'to C and compiles that. Nuitka is effectively an alternate Python interpreter.',
+    useCases: [],
+    dependsOn: [],
+  },
+  {
+    name: 'packaging',
+    features: ['core utilities', 'PEP-440', 'PEP-425'],
+    toolDescription:
+      'Reusable core utilities for various Python Packaging interoperability specifications. ' +
+      'This library provides utilities that implement the interoperability specifications which have clearly one correct behaviour ' +
+      '(eg: PEP 440) or benefit greatly from having a single shared implementation (eg: PEP 425). ' +
+      'The packaging project includes the following: version handling, specifiers, markers, requirements, tags, utilities. ',
+    useCases: [],
+    dependsOn: [],
+  },
+  {
+    name: 'PyO3',
+    features: ['language bindings'],
+    toolDescription:
+      'Rust bindings for Python, including tools for creating native Python ' +
+      'extension modules. Running and interacting with Python code from a Rust binary is also supported.',
+    useCases: [],
+    dependsOn: [],
+  },
+  {
+    name: 'pybind11',
+    features: ['language bindings'],
+    toolDescription:
+      'pybind11 is a lightweight header-only library that exposes C++ types in ' +
+      'Python and vice versa, mainly to create Python bindings of existing C++ code.',
+    useCases: [],
+    dependsOn: [],
   },
 ];
 _initialToolData.sort((a, b) => {
-  return a.name < b.name ? -1 : 1;
+  return a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase() ? -1 : 1;
 });
 export const initialToolData = _initialToolData;

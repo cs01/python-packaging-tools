@@ -2,3 +2,5 @@
 data.json
 makefile
 *.service
+node_modules
+src/App.css

@@ -16,10 +16,6 @@ const tools = [
     owner: "conda",
   },
   {
-    name: "dephell",
-    owner: "dephell",
-  },
-  {
     name: "flit",
     owner: "takluyver",
   },
@@ -30,10 +26,6 @@ const tools = [
   {
     name: "pdm",
     owner: "frostming",
-  },
-  {
-    name: "python-build",
-    owner: "FFY00",
   },
   {
     name: "tox",
@@ -83,6 +75,50 @@ const tools = [
     name: "pip-tools",
     owner: "jazzband",
   },
+  {
+    name: "pex",
+    owner: "pantsbuild",
+  },
+  {
+    name: "shiv",
+    owner: "linkedin",
+  },
+  {
+    name: "PyOxidizer",
+    owner: "indygreg",
+  },
+  {
+    name: "xar",
+    owner: "facebookincubator",
+  },
+  {
+    name: "pyinstaller",
+    owner: "pyinstaller",
+  },
+  {
+    name: "Nuitka",
+    owner: "Nuitka",
+  },
+  {
+    name: "packaging",
+    owner: "pypa",
+  },
+  {
+    name: "build",
+    owner: "pypa",
+  },
+  {
+    name: "pep517",
+    owner: "pypa",
+  },
+  {
+    name: "PyO3",
+    owner: "PyO3",
+  },
+  {
+    name: "pybind11",
+    owner: "pybind",
+  },
 ];
 
 function getQuery(name: string, owner: string) {
@@ -106,17 +142,14 @@ function getQuery(name: string, owner: string) {
           }
           url
           homepageUrl
+          latestRelease {
+            publishedAt
+          }
         }
       }`;
 }
 
 export async function fetchGithubData() {
-  // try {
-  //   console.error("Attempting to read data");
-  //   return JSON.parse(String(fs.readFileSync("./data.json")));
-  // } catch (e) {
-  // console.error(e.message);
-  // console.error("Failed to read, fetching...");
   const data = (
     await Promise.all(
       tools.map((t) => {
@@ -126,19 +159,9 @@ export async function fetchGithubData() {
   ).map((d) => d["repository"]);
   fs.writeFileSync("./data.json", JSON.stringify(data, null, 4));
   return data;
-  // }
 }
 
 async function main() {
   const response = await fetchGithubData();
   console.error(response);
 }
-
-// (async () => {
-//   try {
-//     var text = await main();
-//     console.log(text);
-//   } catch (e) {
-//     console.error(e);
-//   }
-// })();
