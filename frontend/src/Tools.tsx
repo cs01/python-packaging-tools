@@ -206,6 +206,9 @@ export function toolDataToTableData(
   return toolData
     .map((data: Tool) => ({
       ...data,
+      stargazers: data.stargazers?.totalCount
+        ? { totalCount: `⭐ ${data.stargazers.totalCount.toLocaleString()}` }
+        : null,
       name: (
         <div className="font-bold text-lg">
           {data.url ? <a href={data.url}>{data.name}</a> : data.name}
@@ -237,7 +240,7 @@ export function toolDataToTableData(
         .map((url, i) => {
           return (
             <div key={i}>
-              <a href={url} className="hover:bg-yellow-200 text-xs">
+              <a href={url} className="hover:bg-yellow-300 ">
                 {url}
               </a>
             </div>

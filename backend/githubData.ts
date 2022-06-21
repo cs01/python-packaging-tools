@@ -119,6 +119,18 @@ const tools = [
     name: "pybind11",
     owner: "pybind",
   },
+  {
+    name: "pyscript",
+    owner: "pyscript",
+  },
+  {
+    name: "cython",
+    owner: "cython",
+  },
+  {
+    name: "pyodide",
+    owner: "pyodide",
+  },
 ];
 
 function getQuery(name: string, owner: string) {

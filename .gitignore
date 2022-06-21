@@ -3,4 +3,4 @@ data.json
 makefile
 *.service
 node_modules
-src/App.css
+frontend/src/App.css

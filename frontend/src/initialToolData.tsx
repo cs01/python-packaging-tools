@@ -1,4 +1,5 @@
 import { Tool } from './Types';
+import React from 'react';
 
 const zipAppDescription =
   'Makes "python executables", which are files that can be run directly, but require a python interpreter available on the system. This is part of a group of tools that utilize the zipapp feature of the standard library.';
@@ -45,10 +46,14 @@ const _initialToolData: Tool[] = [
       'install cli apps',
     ],
     name: 'pdm',
-    toolDescription:
-      'Helps you declare, manage, and install dependencies of Python projects. ' +
-      'It does not use virtual environments at all. ' +
-      'Instead it installs packages to a local directory called __pypackages__ (PEP-582).',
+    toolDescription: (
+      <div>
+        Helps you declare, manage, and install dependencies of Python projects.
+        It does not use virtual environments at all. Instead it installs
+        packages to a local directory called <code>__pypackages__</code>{' '}
+        (PEP-582).
+      </div>
+    ),
     useCases: [],
     dependsOn: [],
   },
@@ -62,12 +67,15 @@ const _initialToolData: Tool[] = [
       'PEP-582',
     ],
     name: 'pyflow',
-    toolDescription:
-      'Pyflow streamlines working with Python projects and files. ' +
-      "It's an easy-to-use CLI app with a minimalist API. " +
-      'Never worry about having the right version of Python or dependencies. ' +
-      'Instead of using virtual environments, it installs packages to a local ' +
-      'directory named __pypackages__ (PEP-582)',
+    toolDescription: (
+      <div>
+        Pyflow streamlines working with Python projects and files. "Its an
+        easy-to-use CLI app with a minimalist API. " Never worry about having
+        the right version of Python or dependencies. Instead of using virtual
+        environments, it installs packages to a local directory named
+        <code>__pypackages__</code> (PEP-582),
+      </div>
+    ),
     useCases: [],
     dependsOn: [],
   },
@@ -297,6 +305,51 @@ const _initialToolData: Tool[] = [
       'Python and vice versa, mainly to create Python bindings of existing C++ code.',
     useCases: [],
     dependsOn: [],
+  },
+  {
+    name: 'pyscript',
+    features: ['language bindings'],
+    toolDescription: 'A frontend framework to write Python apps in the browser',
+    useCases: [],
+    dependsOn: ['wasm', 'pyodide'],
+  },
+  {
+    name: 'cython',
+    features: ['language bindings'],
+    toolDescription: (
+      <div>
+        Cython generates C code from your Python code, then builds it into a
+        shared object (.so file). These .so files are C extension modules, which
+        can be imported by your Python code, where they run at the speed of a C
+        program. For example, <code>cythonize --build hello.py</code> will build
+        <code> hello.so</code> which can be imported directly in Python code
+        elsewhere with <code>import hello</code>.
+      </div>
+    ),
+    useCases: [],
+    dependsOn: [],
+  },
+  {
+    name: 'pyodide',
+    features: ['language bindings'],
+    toolDescription: (
+      <div>
+        <p>
+          Pyodide is a Python distribution for the browser and Node.js based on
+          WebAssembly. Pyodide is a port of CPython to WebAssembly/Emscripten.
+          Pyodide makes it possible to install and run Python packages in the
+          browser with micropip. Any pure Python package with a wheel available
+          on PyPi is supported. Many packages with C extensions have also been
+          ported for use with Pyodide.{' '}
+        </p>
+        <p>
+          You can try the{' '}
+          <a href="https://pyodide.org/en/stable/console.html">REPL here.</a>
+        </p>
+      </div>
+    ),
+    useCases: [],
+    dependsOn: ['wasm'],
   },
 ];
 _initialToolData.sort((a, b) => {

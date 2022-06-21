@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type GithubGraphqlShape = {
   stargazers?: {
     totalCount: number;
@@ -26,7 +28,7 @@ export type GithubGraphqlShape = {
 export type Tool = {
   name: string;
   features: Feature[];
-  toolDescription: string;
+  toolDescription: string | React.ReactElement;
   dependsOn: string[];
   useCases: string[];
 } & GithubGraphqlShape;
