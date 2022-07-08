@@ -58,7 +58,7 @@ export type Feature =
   | 'PEP-517'
   | 'PEP-660';
 
-// TODO find out how to programatically link this to the type
+// TODO find out how to programmatically link this to the type
 // @ts-ignore
 export const features: Feature[] = [
   'publish packages',
