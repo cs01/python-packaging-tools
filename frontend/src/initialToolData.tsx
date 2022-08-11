@@ -6,7 +6,7 @@ const zipAppDescription =
 
 const _initialToolData: Tool[] = [
   {
-    features: ['install cli apps', 'install libraries'],
+    features: ['install cli apps', 'install libraries', 'dependency resolver'],
     name: 'pip',
     useCases: ['Install libraries', 'Install CLI tools'],
     dependsOn: [],
