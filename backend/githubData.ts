@@ -131,6 +131,10 @@ const tools = [
     name: "pyodide",
     owner: "pyodide",
   },
+  {
+    name: "pip-audit",
+    owner: "trailofbits",
+  },
 ];
 
 function getQuery(name: string, owner: string) {

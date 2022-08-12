@@ -351,6 +351,23 @@ const _initialToolData: Tool[] = [
     useCases: [],
     dependsOn: ['wasm'],
   },
+  {
+    name: 'pip-audit',
+    features: ['security', 'dependency resolver'],
+    toolDescription: (
+      <div>
+        <p>
+          pip-audit is a tool for scanning Python environments for packages
+          with known vulnerabilities. It uses the
+          <a href="https://github.com/pypa/advisory-database">
+          Python Packaging Advisory Database</a> via the PyPI JSON API as a
+          source of vulnerability reports.
+        </p>
+      </div>
+    ),
+    useCases: ['Audit Python packages for known vulnerabilities'],
+    dependsOn: ['pip', 'venv'],
+  }
 ];
 _initialToolData.sort((a, b) => {
   return a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase() ? -1 : 1;
