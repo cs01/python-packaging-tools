@@ -77,6 +77,10 @@ export const columns = [
     accessor: 'timeSinceCreated',
   },
   {
+    Header: 'Owner',
+    accessor: 'owner',
+  },
+  {
     Header: 'Stars',
     accessor: 'stargazers.totalCount',
   },

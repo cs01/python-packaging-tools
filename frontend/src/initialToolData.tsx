@@ -16,8 +16,12 @@ const _initialToolData: Tool[] = [
   {
     features: ['install cli apps', 'virtual environment management'],
     name: 'pipx',
-    toolDescription:
-      'pipx runs and installs cli tools in virtual environments. It focuses and improves on a specific use case handled by pip.',
+    toolDescription: (
+      <div>
+        pipx runs and installs cli tools in virtual environments. It focuses on
+        and improves on a specific use case handled by pip.
+      </div>
+    ),
     useCases: ['Install cli tools to isolated environment'],
     dependsOn: ['pip', 'venv'],
   },
@@ -266,6 +270,7 @@ const _initialToolData: Tool[] = [
     createdAt: '2015-09-13T00:00:00Z',
     primaryLanguage: { name: 'Python' },
     url: 'https://docs.python.org/3/library/venv.html',
+    owner: 'CPython',
   },
   {
     name: 'Nuitka',
@@ -357,17 +362,31 @@ const _initialToolData: Tool[] = [
     toolDescription: (
       <div>
         <p>
-          pip-audit is a tool for scanning Python environments for packages
-          with known vulnerabilities. It uses the
+          pip-audit is a tool for scanning Python environments for packages with
+          known vulnerabilities. It uses the
           <a href="https://github.com/pypa/advisory-database">
-          Python Packaging Advisory Database</a> via the PyPI JSON API as a
-          source of vulnerability reports.
+            Python Packaging Advisory Database
+          </a>{' '}
+          via the PyPI JSON API as a source of vulnerability reports.
         </p>
       </div>
     ),
     useCases: ['Audit Python packages for known vulnerabilities'],
     dependsOn: ['pip', 'venv'],
-  }
+  },
+  {
+    name: 'cibuildwheel',
+    features: ['build packages'],
+    toolDescription: (
+      <div>
+        On your CI server, cibuildwheel builds and tests your wheels across all
+        of your platforms (macOS, linux, windows). Supports GitHub Actions,
+        Azure Pipelines, Travis CI, AppVeyor, CircleCI, and GitLab CI.
+      </div>
+    ),
+    useCases: [],
+    dependsOn: [],
+  },
 ];
 _initialToolData.sort((a, b) => {
   return a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase() ? -1 : 1;

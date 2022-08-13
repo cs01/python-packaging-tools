@@ -36,7 +36,7 @@ const tools = [
     owner: "theacodes",
   },
   {
-    owner: "pipxproject",
+    owner: "pypa",
     name: "pipx",
   },
   {
@@ -135,11 +135,15 @@ const tools = [
     name: "pip-audit",
     owner: "trailofbits",
   },
+  {
+    name: "cibuildwheel",
+    owner: "pypa",
+  },
 ];
 
 function getQuery(name: string, owner: string) {
   return `query {
-        repository(owner: "${owner}", name: "${name}") {
+        repository(owner: "${owner}", name: "${name}", followRenames: true) {
           stargazers {
             totalCount
           }
@@ -166,13 +170,13 @@ function getQuery(name: string, owner: string) {
 }
 
 export async function fetchGithubData() {
-  const data = (
-    await Promise.all(
-      tools.map((t) => {
-        return octokit.graphql(getQuery(t.name, t.owner));
-      })
-    )
-  ).map((d) => d["repository"]);
+  const data = await Promise.all(
+    tools.map(async (t) => {
+      const r = await octokit.graphql(getQuery(t.name, t.owner));
+      // @ts-ignore
+      return { ...r["repository"], owner: t.owner };
+    })
+  );
   fs.writeFileSync("./data.json", JSON.stringify(data, null, 4));
   return data;
 }
