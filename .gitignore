@@ -1,6 +1,5 @@
 .env
 data.json
 makefile
-*.service
 node_modules
 frontend/src/App.css
