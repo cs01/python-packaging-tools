@@ -1,0 +1,17 @@
+# https://www.freedesktop.org/software/systemd/man/systemd.service.html
+[Unit]
+Description=
+After=network.target
+
+[Service]
+User=csmith
+Group=www-data
+WorkingDirectory=$HOME/webapps/python-packaging-tools/backend
+PermissionsStartOnly=true
+ExecStart=/bin/bash $HOME/webapps/python-packaging-tools/backend/start.sh
+ExecStop=
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
