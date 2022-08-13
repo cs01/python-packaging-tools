@@ -34,29 +34,30 @@ export type Tool = {
 } & GithubGraphqlShape;
 
 export type Feature =
-  | 'core utilities'
-  | 'publish packages'
-  | 'build packages'
-  | 'language bindings'
-  | 'builds executable'
   | 'application deployment'
-  | 'task automation'
+  | 'build packages'
+  | 'builds executable'
+  | 'convert between lockfile formats'
+  | 'core utilities'
+  | 'dependency resolver'
+  | 'ecosystem'
   | 'install cli apps'
   | 'install libraries'
   | 'install Python interpreter'
-  | 'standard library'
-  | 'dependency resolver'
+  | 'language bindings'
   | 'manual virtual environment creation'
-  | 'virtual environment management'
   | 'package manager'
-  | 'ecosystem'
-  | 'convert between lockfile formats'
-  | 'PEP-440'
   | 'PEP-425'
-  | 'PEP-582'
-  | 'PEP-518'
+  | 'PEP-440'
   | 'PEP-517'
-  | 'PEP-660';
+  | 'PEP-518'
+  | 'PEP-582'
+  | 'PEP-660'
+  | 'publish packages'
+  | 'security'
+  | 'standard library'
+  | 'task automation'
+  | 'virtual environment management';
 
 // TODO find out how to programmatically link this to the type
 // @ts-ignore
