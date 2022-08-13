@@ -21,12 +21,12 @@ jobs:
             git clone https://github.com/cs01/python-packaging-tools $HOME/webapps/python-packaging-tools || true
             cd $HOME/webapps/python-packaging-tools
             git reset --hard
-            cd frontend
+            cd $HOME/webapps/python-packaging-tools/frontend
             yarn
             yarn build
 
             # reload and restart systemd service
-            sudo cp scripts/python-packaging-tools.service /etc/systemd/system/python-packaging-tools.service
+            sudo cp $HOME/webapps/python-packaging-tools/scripts/python-packaging-tools.service /etc/systemd/system/python-packaging-tools.service
             sudo systemctl daemon-reload
             sudo systemctl enable python-packaging-tools.service
             sudo systemctl restart python-packaging-tools
