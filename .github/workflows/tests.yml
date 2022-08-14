@@ -1,0 +1,50 @@
+name: tests
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  test_frontend:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: |
+        cd frontend
+        yarn install
+        yarn build
+        yarn lint
+
+  test_backend:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - run: |
+        cd backend
+        touch .env
+        echo API_KEY=${{ secrets.API_KEY }} > .env
+        yarn install
+        yarn test
+        yarn lint
+

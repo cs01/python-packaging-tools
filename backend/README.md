@@ -1,13 +1,13 @@
 # Backend
 
-Add .env file with secret key:
+You will need your own GitHub api key to access the GitHub's api via [Octokit](https://github.com/octokit).
+
+Save the API key to the .env file:
 
 ```
 > cat .env
 API_KEY=abcd1234
 ```
-
-This key is used to access github's [Octokit](https://github.com/octokit).
 
 ## Getting Started
 

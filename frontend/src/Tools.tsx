@@ -1,4 +1,4 @@
-import { GithubGraphqlShape, Tool, Feature, features } from './Types';
+import { GithubGraphqlShape, Tool, Feature } from './Types';
 import React from 'react';
 import { useTable, useSortBy, useFlexLayout } from 'react-table';
 import { DateTime } from 'luxon';
@@ -106,20 +106,15 @@ export const columns = [
 
 export function Table({ columns, data }: any) {
   // Use the state and functions returned from useTable to build your UI
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable(
-    {
-      columns,
-      data,
-    },
-    useSortBy,
-    useFlexLayout,
-  );
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      {
+        columns,
+        data,
+      },
+      useSortBy,
+      useFlexLayout,
+    );
 
   // Render the UI for your table
   return (

@@ -1,7 +1,7 @@
 import * as express from "express";
 import { fetchGithubData } from "./githubData";
 import * as path from "path";
-const app = express();
+export const app = express();
 const port = process.env.PORT ?? 3001;
 
 const secPerMin = 60;
@@ -37,6 +37,8 @@ app.get("/package_data", async (req, res) => {
 
 app.use("/", express.static(path.join(__dirname, "..", "frontend", "build")));
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+if (process.env.NODE_ENV !== "test") {
+  app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+  });
+}

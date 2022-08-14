@@ -48,7 +48,7 @@ function FeaturesAndTable() {
     () => toolDataToTableData(toolData, featureFilters),
     [toolData, featureFilters],
   );
-  const isFiltered = tableData.length != toolData.length;
+  const isFiltered = tableData.length !== toolData.length;
   const displayingToolSummary = (
     <div className={'text-sm ' + (isFiltered ? 'font-bold bg-yellow-300' : '')}>
       Displaying {tableData.length} of {toolData.length} tools
