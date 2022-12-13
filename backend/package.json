@@ -12,7 +12,7 @@
   "dependencies": {
     "@octokit/core": "^3.1.2",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "ts-jest": "^28.0.7",
     "ts-node": "^9.0.0"
   },
