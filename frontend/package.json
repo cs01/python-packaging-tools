@@ -30,7 +30,7 @@
   "dependencies": {
     "@types/luxon": "^1.24.4",
     "dotenv": "^8.2.0",
-    "luxon": "^1.25.0",
+    "luxon": "^2.5.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-table": "^7.5.0",
